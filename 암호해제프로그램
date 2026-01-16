@@ -33,8 +33,8 @@ if not cap.isOpened():
     exit()
 
 password = [1, 2, 0, 5]
-result_text = ""  # 화면에 표시할 텍스트
-result_color = (0, 0, 0)  # 텍스트 색상
+result_text = ""
+result_color = (0, 0, 0)
 hint_text = ""
 hint_color = (0, 0, 0)
 input_password = []
@@ -55,6 +55,7 @@ while True:
 
     cv2.putText(flip_frame, result_text, (center_x-100, center_y-170), cv2.FONT_HERSHEY_SIMPLEX, 1.2, result_color, 3)
     cv2.putText(flip_frame, hint_text, (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.5, hint_color, 2)
+    cv2.putText(flip_frame, f"password : {input_password}", (20, 80), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
     cv2.imshow('Webcam', flip_frame)
 
     #화면 캡쳐를 위한 키 값 받기
@@ -104,7 +105,6 @@ while True:
         print(f"현재 입력현황 : {input_password}")
 
 
-
         if len(input_password) == len(password):
             if input_password == password:
                 flip_frame = cv2.flip(frame, 1)
@@ -112,6 +112,8 @@ while True:
                 result_color = (0, 255, 0)
                 winsound.Beep(1000, 100)
                 winsound.Beep(1500, 100)
+                winsound.Beep(1500, 100)
+                winsound.Beep(2000, 150)
                 winsound.Beep(2000, 150)
                 print("비밀번호가 맞습니다. 문이 열립니다!")
 
@@ -128,6 +130,8 @@ while True:
                 print(f"비밀번호가 틀렸습니다. (입력한 값: {input_password})!")
                 result_text = "TRY AGAIN!"
                 result_color = (0, 0, 255)
+                winsound.Beep(2000, 50)
+                winsound.Beep(2000, 50)
                 winsound.Beep(2000, 50)
                 fail_frame = cv2.bitwise_not(flip_frame)
                 cv2.imshow('Webcam', fail_frame)
